@@ -28,4 +28,8 @@ public class ProductService {
         }
         return null;
     }
+
+    public void deleteProduct(int id) {
+        productList.removeIf(prod -> prod.getId() == id);
+    }
 }
