@@ -19,6 +19,7 @@ public class ProductController {
     @GetMapping("/product")
     public List<Product> getProductlist()
     {
+
         return service.getAllProducts();
     }
 
