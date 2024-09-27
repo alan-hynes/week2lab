@@ -7,7 +7,7 @@ import java.util.List;
 
 @Service
 public class ProductService {
-    private List<Product> productList = new ArrayList<>();
+    private final List<Product> productList = new ArrayList<>();
 
     public List<Product>getAllProducts() {
         return productList;
@@ -16,5 +16,16 @@ public class ProductService {
     public Product addProduct(Product product) {
         productList.add(product);
         return product;
+    }
+
+    public Product editProduct(Product product) {
+        for (Product prod : productList) {
+            if (prod.getId().equals(product.getId())) {
+                prod.setName(product.getName());
+                prod.setPrice(product.getPrice());
+                return prod;
+            }
+        }
+        return null;
     }
 }
