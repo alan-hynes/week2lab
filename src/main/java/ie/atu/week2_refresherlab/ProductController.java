@@ -30,7 +30,7 @@ public class ProductController {
     }
 
     @PutMapping("/product")
-    public Product editProduct(@RequestBody Product product)
+    public Product editProduct(@Valid @RequestBody Product product)
     {
         return service.editProduct(product);
     }

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ProductService {
@@ -26,10 +27,10 @@ public class ProductService {
                 return prod;
             }
         }
-        return null;
+        throw new IllegalArgumentException("No product with id " + product.getId() + " found");
     }
 
     public void deleteProduct(int id) {
-        productList.removeIf(prod -> prod.getId() == id);
+        productList.removeIf(prod -> Objects.equals(prod.getId(), (long) id));
     }
 }
