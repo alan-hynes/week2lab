@@ -7,10 +7,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/products")
 public class ProductController {
-    private final ProductService service;
 
     @Autowired
+    private final ProductService service;
+    private Object product;
+
     public ProductController(ProductService service)
     {
         this.service = service;
@@ -39,4 +42,11 @@ public class ProductController {
     public void deleteProduct(@PathVariable int id) {
         service.deleteProduct(id);
     }
+
+    @GetMapping("/stock/{productId}")
+    public boolean checkStock(@PathVariable Long productId) {
+        service.getProductByID(productId);
+        return product.getStock() > 0;
+    }
+
 }
