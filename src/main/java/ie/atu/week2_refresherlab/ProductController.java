@@ -10,43 +10,42 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
 
-    @Autowired
-    private final ProductService service;
-    private Object product;
+    private final ProductService productService;
 
-    public ProductController(ProductService service)
+    @Autowired
+    public ProductController(ProductService productService)
     {
-        this.service = service;
+        this.productService = productService;
     }
 
-    @GetMapping("/product")
+    @GetMapping
     public List<Product> getProductlist()
     {
-
-        return service.getAllProducts();
+        return productService.getAllProducts();
     }
 
-    @PostMapping("/product")
+    @PostMapping("/add")
     public Product addProduct(@Valid @RequestBody Product product)
     {
-        return service.addProduct(product);
+
+        return productService.addProduct(product);
     }
 
-    @PutMapping("/product")
-    public Product editProduct(@Valid @RequestBody Product product)
+    @PutMapping("/edit/{id}")
+    public Product editProduct(@PathVariable Long id, @Valid @RequestBody Product product)
     {
-        return service.editProduct(product);
+        return productService.editProduct(id, product);
     }
 
-    @DeleteMapping("/product/{id}")
-    public void deleteProduct(@PathVariable int id) {
-        service.deleteProduct(id);
+    @DeleteMapping("/delete/{id}")
+    public void deleteProduct(@PathVariable Long id) {
+
+        productService.deleteProduct(id);
     }
 
-    @GetMapping("/stock/{productId}")
-    public boolean checkStock(@PathVariable Long productId) {
-        service.getProductByID(productId);
-        return product.getStock() > 0;
+    @GetMapping("/{id}")
+    public Product getProductById(@PathVariable Long id) {
+        return productService.getProductByID(id);
     }
 
 }
