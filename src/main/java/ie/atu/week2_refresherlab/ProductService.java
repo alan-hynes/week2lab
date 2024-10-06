@@ -22,7 +22,7 @@ public class ProductService {
 
     public Product editProduct(Long id, Product product) {
         for (Product prod : productList) {
-            if (prod.getId().equals(product.getId())) {
+            if (prod.getId().equals(id)) {
                 prod.setName(product.getName());
                 prod.setPrice(product.getPrice());
                 prod.setStock(product.getStock());
