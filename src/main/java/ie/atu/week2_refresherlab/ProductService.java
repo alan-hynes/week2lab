@@ -20,7 +20,7 @@ public class ProductService {
         return product;
     }
 
-    public Product editProduct(Product product) {
+    public Product editProduct(Long id, Product product) {
         for (Product prod : productList) {
             if (prod.getId().equals(product.getId())) {
                 prod.setName(product.getName());
@@ -32,7 +32,7 @@ public class ProductService {
         throw new IllegalArgumentException("No product with id " + product.getId() + " found");
     }
 
-    public void deleteProduct(int id) {
+    public void deleteProduct(Long id) {
         productList.removeIf(prod -> Objects.equals(prod.getId(), (long) id));
     }
 
