@@ -8,6 +8,7 @@ import java.util.Objects;
 
 @Service
 public class ProductService {
+
     private final List<Product> productList = new ArrayList<>();
 
     public List<Product>getAllProducts() {
@@ -24,6 +25,7 @@ public class ProductService {
             if (prod.getId().equals(product.getId())) {
                 prod.setName(product.getName());
                 prod.setPrice(product.getPrice());
+                prod.setStock(product.getStock());
                 return prod;
             }
         }
@@ -34,6 +36,10 @@ public class ProductService {
         productList.removeIf(prod -> Objects.equals(prod.getId(), (long) id));
     }
 
-    public void getProductByID(Long productId) {
+    public Product getProductByID(Long id) {
+        return productList.stream()
+                .filter(product -> Objects.equals(product.getId(), id))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Product with ID" + id + " not found"));
     }
 }
